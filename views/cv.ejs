@@ -1,0 +1,84 @@
+<%- contentFor('styles') %>
+<style>
+	body {
+		font-family: <%= style[0][0] %>;
+		font-size: <%= style[0][3] %>;
+		background-color: <%= style[0][2] %>;
+	}
+
+	.AlterarCor {
+		text-align: <%= style[0][4] %> ;
+		background-color: <%= style[0][1] %> ;
+	}
+
+	h2 {
+		font-size: <%= style[0][5] %>;
+	}
+
+</style>
+
+<%- contentFor('secao1') %> 
+<div class="jumbotron text-center AlterarCor">
+	<div class="text-center">
+		<h2> Curriculo de <%= vetorSess[0][0] %></h2> 
+	</div>
+
+	<img class="img-responsive" src="data/<%=sess.user%>/<%=sess.user%>.jpg" style="height: 25%; width: 25%; margin: auto;">
+</div>
+
+<%- contentFor('secao2') %>
+
+<% var qtd = parseInt(vetorSess[0][2]) %>
+<% var index = 0 %>
+
+<% while (index != qtd) {%>
+
+	<div class="jumbotron AlterarCor">
+		<div class="text-center">
+			<h2> <%= SecStyle[index][0] %> </h2> 
+		</div>
+
+		<% if ( SecStyle[index][1] == 'Lista ordenada ( Ex.: I. II. III. IV. )') { %>
+		<div>
+			<ol type="I">
+				<% for (var i=0; i < info[index].length; i++) {%>
+					<li> <%= info[index][i] %> </li>
+				<% } %>
+			</ol>
+		</div>
+		<% } else if ( SecStyle[index][1] == 'Lista ordenada ( Ex.: 1. 2. 3. 4. 5. )') { %>
+		<div>
+			<ol type="1">
+				<% for (var i=0; i < info[index].length; i++) {%>
+					<li> <%= info[index][i] %> </li>
+				<% } %>
+			</ol>
+		</div>
+		<% } else if ( SecStyle[index][1] == 'Lista não ordenada ( Ex.: * )') { %>
+		<div>
+			<ul>
+				<% for (var i=0; i < info[index].length; i++) {%>
+					<li> <%= info[index][i] %> </li>
+				<% } %>
+			</ul>
+		</div>
+
+		<% } else if ( SecStyle[index][1] == 'Paragrafos') { %>
+		<div>
+			<% for (var i=0; i < info[index].length; i++) {%>
+				<p> <%= info[index][i] %> </p>
+			<% } %>
+		</div>
+
+		<% } else if ( SecStyle[index][1] == 'Títulos') { %>
+			<div>
+				<% for (var i=0; i < info[index].length; i++) {%>
+					<h4> <%= info[index][i] %> </h4>
+				<% } %>
+			</div>
+
+		<% } %>
+	</div>
+
+	<% index++ %>
+<% } %>

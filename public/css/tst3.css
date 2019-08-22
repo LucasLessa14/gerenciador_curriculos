@@ -1,0 +1,23 @@
+body {
+    background-color: white;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+}
+
+h2 {
+    text-align: left;
+    color: white;
+}
+
+p {
+    text-align: center;
+    color: black;
+}
+
+.azul{
+	background-color: blue;
+	border: solid 1px black;
+}

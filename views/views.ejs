@@ -1,0 +1,20 @@
+<%- contentFor('secao1') %>
+
+<div class="jumbotron text-center AlterarCor">
+	<h2> Veja o curriculo dos seus colegas</h2> 
+
+	<form action='/openCV' method="post">
+		<div class="row">
+			<div class="form-group">
+				<label for="views">Curriculos</label>
+				<select class="form-control" id="views" name="views">
+                    <% for (var i = 0; i < allNick[0].length; i++) { %>
+					<option><%= allNick[0][i] %></option>
+                    <% } %>
+				</select>
+            </div>
+		</div>
+        
+        <input type="submit" name="buscar" value="buscar" />
+    </form>
+</div>

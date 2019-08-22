@@ -1,0 +1,6 @@
+Arial,
+#ffffff,
+#ff8000,
+12px,
+center,
+36px

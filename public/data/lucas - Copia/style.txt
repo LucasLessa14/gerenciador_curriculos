@@ -1,0 +1,6 @@
+Georgia,
+#ff0080,
+#ffffff,
+18px,
+right,
+48px

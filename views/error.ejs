@@ -1,0 +1,16 @@
+<%- contentFor('secao1') %>
+<h1> Nick do CV que você quer abrir </h1>
+
+<%- contentFor('secao2') %>
+<form action="/cv" method="GET">
+  Nick:<br>
+  <input type="text" name="name" value="fulano"><br>
+  <br>
+  <input type="submit" value="Abrir CV" onclick>
+</form>
+
+<%- contentFor('secao3') %>
+<div class="jumbotron text-center" style="margin-top: 20px;">
+		<h2> Error ao carregar a página de <%= userName %></h1> 
+		<p> Tente procurar por outro CV </p>
+</div>

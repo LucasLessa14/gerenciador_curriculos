@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Utilizando o EJS</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="public/css/styles.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+            <% if (!sess.user) { %>                <li> <a href="/">Login</a></li>                 <% } %>
+            <% if (!sess.user) { %>                <li> <a href="/cadastrar">Cadastrar</a></li>    <% } %>
+            <% if (sess.user) { %>                 <li> <a href="/">Home</a></li>                  <% } %>
+            <% if (sess.user) { %>                 <li> <a href="/views">Views</a></li>                  <% } %>
+            <% if (sess.tipo == 'admin') { %>      <li> <a href="/admin">Admin</a></li>            <% } %>
+            <% if (sess.status == 'ok' ) { %>      <li> <a href="/config">Config</a></li>          <% } %>
+            <% if (sess.user) { %>                 <li> <a href="/logout">Logout</a></li>          <% } %>
+          </ul>
+        </div>
+     </nav>
+
+     <%- defineContent ('styles') %>
+  </header>
+
+   <main>
+     <div class="container">
+      <%- defineContent ('secao1') %>
+      <%- defineContent ('secao2') %>
+      <%- defineContent ('secao3') %>
+      <%- defineContent ('secao4') %>
+      </div>
+     </div>
+   </main>
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <!-- Include all compiled plugins (below), or include individual files as needed -->
+   <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>  

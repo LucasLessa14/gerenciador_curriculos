@@ -1,0 +1,6 @@
+Verdana,
+#80ff80,
+#ffffff,
+14px,
+left,
+48px

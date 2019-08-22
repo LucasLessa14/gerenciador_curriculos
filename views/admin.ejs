@@ -1,0 +1,82 @@
+<%- contentFor('secao1') %>
+
+	<div class="jumbotron text-center">
+	    <h1> Bem-vindo, <%= sess.nickUser %> </h1>
+	    <h2> Pagina do administrador</h2> 
+	</div>
+
+<%- contentFor('secao2') %>
+
+	<table class="table table-striped table-bordered table-hover table-condensed">
+
+		<thead>
+			<tr>
+				<th>Usuario</th>
+				<th>Delete</th>
+				<th>Tipo</th>
+				<th>Qtd Sessões</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+
+		<tbody>
+
+			<% for (var i=0; i < sess.tamanhoVetor; i++) {%>
+				<% if(sess.dataForEach[i][3] == 'block'){ %>
+				   <tr class="danger">
+				<% } else{ %>  
+				   <tr>
+				<% } %>
+					
+					<td>
+						<%= sess.dataForEach[i][0] %>
+					</td>
+
+					<td>
+						<div style="display: inline-block;">
+							<form action="/deleteUser" method="get">
+								<input type="submit" name="button" id="b<%= i %>" value="<%= i %>">
+								<span class="glyphicon glyphicon-trash"></span>
+							</form>
+						</div>
+					</td>
+
+					<td>
+						<div style="display: inline-block;">
+							<form action="/tipoUser" method="get">
+								<input type="submit" name="button" id="b<%= i %>" value="<%= i %>">
+								<% if(sess.dataForEach[i][1] != 'admin'){ %>
+									<span class="glyphicon glyphicon-user"></span>
+								<% } else{ %>
+	          						<span class="glyphicon glyphicon-plus"></span>
+	          					<% } %>
+							</form>
+						</div>
+
+						<%= sess.dataForEach[i][1] %>
+					</td>
+
+					<td>
+						<%= sess.dataForEach[i][2] %>
+					</td>
+
+					<td>
+						<div style="display: inline-block;">
+							<form action='/blockuser' method='get'>
+								<input type="submit" name="button" id="b<%= i %>" value="<%= i %>">
+								<% if(sess.dataForEach[i][3] == 'block'){ %>
+								    <span class="glyphicon glyphicon-ban-circle"></span>
+								<% } else{ %>
+	          						<span class="glyphicon glyphicon-ok"></span>
+	          					<% } %>
+		        			</form>
+		        		</div>
+
+						<%= sess.dataForEach[i][3] %>
+					</td>
+
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+	

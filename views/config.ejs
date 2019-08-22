@@ -1,0 +1,252 @@
+<%- contentFor('styles') %>
+<style>
+	body {
+		font-family: <%= style[0][0] %>;
+		font-size: <%= style[0][3] %>;
+		background-color: <%= style[0][2] %>;
+	}
+
+	.AlterarCor {
+
+		background-color: <%= style[0][1] %>;
+	}
+
+	h2 {
+		font-size: <%= style[0][5] %>;
+	}
+
+</style>
+
+<%- contentFor('secao1') %>
+
+<div class="jumbotron text-center AlterarCor">
+	<h2> Foto de perfil de <%= sess.nickUser %></h2> 
+
+	<img class="img-responsive" src="data/<%=sess.user%>/<%=sess.user%>.jpg" style="height: 25%; width: 25%; margin: auto;">
+
+	<div>
+		<form action='/' method='post' encType="multipart/form-data">
+			<input type="file" name="file" style="margin: 10px auto;" />
+			<input type='submit' value='Upload!' />
+		</form>	
+	</div>
+	
+</div>
+
+<%- contentFor('secao2') %>
+<div id='menuConfig' style="position: relative; float: right; padding: 10px;">	
+	<form action='/salvarStyle' method='get'>
+		<input type="submit" name="button" id="b<%= index %>" value="Salvar Layout Atual">
+	</form>
+</div>
+
+<div class="jumbotron text-center AlterarCor">
+	<h2>Configure seus perfis aqui</h2>
+
+	<form action='/alterarStyle' method="post">
+		<div class="row">
+			<div class="form-group col-md-2 offset-md-1">
+				<label for="fonte">Fonte</label>
+				<select class="form-control" id="fonte" name="fonte">
+					<option>Arial</option>
+					<option>Verdana</option>
+					<option>Times New Roman</option>
+					<option>Georgia</option>
+					<option>Courier New</option>
+					<option>Lucida Console</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label for="color">Cor das seções</label>
+				<br>
+				<input type="color" name='color' value="#C8C8C8">
+			</div>
+
+			<div class="form-group col-md-2">
+				<label for="Background">Background</label>
+				<br>
+				<input type="color" name='Background' value="#FFFFFF">
+			</div>
+
+			<div class="form-group col-md-2">
+				<label for="sizeFont">Tamanho da Fonte</label>
+				<select class="form-control" id="sizeFont" name="sizeFont">
+					<option>12px</option>
+					<option>14px</option>
+					<option>16px</option>
+					<option>18px</option>
+					<option>20px</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label for="align">Alinhamento</label>
+				<select class="form-control" id="align" name="align">
+					<option>center</option>
+					<option>right</option>
+					<option>left</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label for="sizeTitle">Tamanho dos Títulos</label>
+				<select class="form-control" id="sizeTitle" name="sizeTitle">
+					<option>36px</option>
+					<option>40px</option>
+					<option>48px</option>
+					<option>54px</option>
+					<option>64px</option>
+				</select>
+			</div>
+		</div>
+
+		<input type="submit" name="alterarStyle" value="alterar" />
+	</form>
+</div>
+
+<div class="jumbotron text-center AlterarCor">
+	<h2>Escolher Layout entre os Salvos</h2>
+
+	<form action="/changeStyle" method="GET">
+		<div class="row">
+			<div class="form-group">
+				<label for="views">Curriculos</label>
+				<select class="form-control" id="views" name="views">
+                    <% for (var i = 0; i < parseInt(cont[0][0]); i++) { %>
+					<option>style <%=i + 1%></option>
+                    <% } %>
+				</select>
+            </div>
+		</div>
+
+		<input type="submit" name="changeStyle" value="alterar"/>
+	</form>
+</div>
+
+<%- contentFor('secao3') %>
+
+<% var qtd = parseInt(sess.qtd) %>
+<% var index = 0 %>
+<% var adicionar = true %>
+
+<% while (index != qtd) {%>
+
+	<% if(index == (cont[0][2] - 1)) { %>
+	<% adicionar = false %>
+	<div class="jumbotron AlterarCor">
+
+		<div id='menuConfig' style="position: relative; float: right; padding: 10px;">
+			<div style="display: inline-block;">
+				<form action='/cancelar' method='get'>
+					<input type="submit" name="button" id="b<%= index %>" value="X">
+					<span class="glyphicon glyphicon-ban-trash"></span>
+				</form>
+			</div>
+		</div>
+
+		<form action='/salvarEdit' method="post">
+	  		<div class="form-group">
+	    		<label for="title">Título</label>
+				<input type="text" class="form-control" name="title" id="title" placeholder="Título da secção">
+	  		</div>
+	  
+	  		<div class="form-group">
+	    		<label for="tipoConteudo">Tipo de conteudo</label>
+	    		<select class="form-control" id="tipoConteudo" name="tipoConteudo">
+				    <option>Lista ordenada ( Ex.: I. II. III. IV. )</option>
+				    <option>Lista ordenada ( Ex.: 1. 2. 3. 4. 5. )</option>
+				    <option>Lista não ordenada ( Ex.: * )</option>
+				    <option>Paragrafos</option>
+				    <option>Títulos</option>
+				</select>
+	  		</div>
+
+	  		<div class="form-group">
+	    		<label for="conteudo">Conteudo</label>
+				<textarea class="form-control" id="conteudo" name="conteudo" rows="7"></textarea>
+	  		</div>
+
+	  		<input type="submit" name="salvar">
+		</form>
+	</div>
+
+	<% } else { %>
+
+	<div id='menuConfig' style="position: relative; float: right; padding: 10px;">
+		
+		<div style="display: inline-block;">
+			<form action='/remove' method='get'>
+				<input type="submit" name="button" id="b<%= index %>" value="<%= index + 1 %>">
+				<span class="glyphicon glyphicon-ban-trash">Remove</span>
+			</form>
+		</div>
+
+		<div style="display: inline-block;">
+			<form action='/edit' method='get'>
+				<input type="submit" name="button" id="b<%= index %>" value="<%= index + 1%>">
+				<span class="glyphicon glyphicon-ban-pencil">Editar</span>
+			</form>   		
+		</div>
+	</div>
+
+	<div class="jumbotron define AlterarCor">
+		<div class="text-center">
+			<h2> Vou falar um pouco sobre <%= sess.nickUser %></h2> 
+		</div>
+
+		<div style="position: relative; float: center; padding: 0% 30%;">
+			<ul>
+				<% for (var i=0; i < info[index].length; i++) {%>
+					<li> <%= info[index][i] %> </li>
+				<% } %>
+			</ul>
+		</div>
+	</div>
+
+	<% } %>
+
+	<% index++ %>
+<% } %>
+
+<%- contentFor('secao4') %>
+<% if(!adicionar) { %>
+	<div class="jumbotron AlterarCor">
+		<div id='menuConfig'>
+			<div style="display: inline-block; padding: 0% 40%;">
+				<form action='/cancelar' method='get'>
+					<input type="submit" name="button" id="b" value="Nova Secção">
+					<span class="glyphicon glyphicon-ban-trash"></span>
+				</form>
+			</div>
+		</div>
+	</div>
+<% } else { %>
+	<div class="jumbotron AlterarCor">
+
+		<form action='/salvarSess' method="post">
+	  		<div class="form-group">
+	    		<label for="title">Título</label>
+				<input type="text" class="form-control" name="title" id="title" placeholder="Título da secção">
+	  		</div>
+	  
+	  		<div class="form-group">
+	    		<label for="tipoConteudo">Tipo de conteudo</label>
+	    		<select class="form-control" id="tipoConteudo" name="tipoConteudo">
+				    <option>Lista ordenada ( Ex.: I. II. III. IV. )</option>
+				    <option>Lista ordenada ( Ex.: 1. 2. 3. 4. 5. )</option>
+				    <option>Lista não ordenada ( Ex.: * )</option>
+				    <option>Paragrafos</option>
+				    <option>Títulos</option>
+				</select>
+	  		</div>
+
+	  		<div class="form-group">
+	    		<label for="conteudo">Conteudo</label>
+	    		<textarea class="form-control" id="conteudo" name="conteudo" rows="7"></textarea>
+	  		</div>
+
+	  		<input type="submit" name="salvar">
+		</form>
+	</div>
+<% } %>

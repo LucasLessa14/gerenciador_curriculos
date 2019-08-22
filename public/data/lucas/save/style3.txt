@@ -1,0 +1,6 @@
+Courier New,
+#ffffff,
+#fdf0c4,
+14px,
+left,
+48px

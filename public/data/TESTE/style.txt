@@ -1,0 +1,6 @@
+Arial,
+LightGrey,
+White,
+16px,
+center,
+24px
